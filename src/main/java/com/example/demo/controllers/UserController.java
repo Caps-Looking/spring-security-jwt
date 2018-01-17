@@ -34,7 +34,8 @@ public class UserController {
     @PostMapping("users/login")
     public String login(@RequestBody ApplicationUser user) {
         ApplicationUser userDTO = new ApplicationUser();
-        userDTO.builder().username(user.getUsername()).password(user.getPassword()).build();
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject("http://localhost:8080/login", userDTO, String.class);
     }
