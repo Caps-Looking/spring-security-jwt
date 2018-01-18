@@ -22,7 +22,7 @@ public class SwaggerConfig {
 
     @Bean
     public Docket apiDoc() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2).groupName("Common")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.demo.controllers"))
                 .paths(regex("/v1.*")).build()
@@ -33,6 +33,15 @@ public class SwaggerConfig {
                         .parameterType("header")
                         .required(false)
                         .build()))
+                .apiInfo(metaData());
+    }
+
+    @Bean
+    public Docket apiSecurity() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("Security")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo.configs.security.controller"))
+                .paths(regex("/v1.*")).build()
                 .apiInfo(metaData());
     }
 

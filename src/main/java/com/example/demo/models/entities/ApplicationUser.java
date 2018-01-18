@@ -3,10 +3,8 @@ package com.example.demo.models.entities;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,12 +18,13 @@ public class ApplicationUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
+    @Size(min = 5)
+    @Column(nullable = false)
     private String username;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String password;
 
-    private boolean isAdmin;
+    private boolean admin;
 
 }
